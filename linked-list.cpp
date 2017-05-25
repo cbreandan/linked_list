@@ -1,3 +1,6 @@
+#include <iostream>
+#include <stdbool>
+
 class LinkedList {
 private:
   Node *head;
@@ -14,16 +17,17 @@ public:
   ~LinkedList();
 
   //operations
+  int size();
   bool isEmpty();
 
   //insert
   void insertFront(int val);
   void insertBack(int val);
-  void insertBefore(int key, int val);
   void insertAfter(int key, int val);
 
-  //remove
-  void removeAt(int val);
+  //remove - list must be non-empty
+  void removeAt(int key);
+  void removeAfter(int key);
 
   //print
   void print();
@@ -32,13 +36,27 @@ public:
   bool isCycle();
 };
 
+int LinkedList::size(){
+  int total = 0;
+  if (!head){
+	return 0;
+  }
+  else {
+	Node *n = head;
+	while (n){
+	  total += 1;
+	  n = n->next;
+	}
+  }
+}
+
 bool LinkedList::isEmpty(){
-  !head ? true : false; 
+  size() ? true : false;
 }
 
 void LinkedList::insertFront(int val){
   Node n = Node(val);
-  if (isEmpty){
+  if (isEmpty()){
     head = n;
     tail = n;
   } else {
@@ -49,7 +67,7 @@ void LinkedList::insertFront(int val){
 
 void LinkedList::insertBack(int val){
   Node *n = Node(val);
-  if (isEmpy){
+  if (isEmpy()){
     head = n;
     tail = n;
   } else {
@@ -58,35 +76,46 @@ void LinkedList::insertBack(int val){
   }
 }
 
-void LinkedList::insertBefore(int key, int val){
-	
-}
-
 void LinkedList::insertAfter(int key, int val){
+  if (isEmpty()){
+	head = n;
+	tail = n;
+  }
+  else{
 	Node *n = head;
 	while (n){
-		if (n->key == key){
-			Node new_node = Node(val);
-			new_node.next = n->next;
-			n->next = new_node;
-		}
-		else {
-			n = n->next;
-		}
+	  if (n->key == key){
+		Node new_node = Node(val);
+		new_node.next = n->next;
+		n->next = new_node;
+		return;
+	  }
+	  else {
+		n = n->next;
+	  }
 	}
+	cout << "unable to find key: " + key << endl;
+  }
+}
+
+void LinkedList::removeAt(int key){
+}
+
+void LinkedList::removeAfter(int key){
+
 }
 
 void LinkedList::print(){
-	if (isEmpty){
-		cout << "The list is empty!" << endl;
+  if (isEmpty){
+	cout << "The list is empty!" << endl;
+  }
+  else {
+	Node n = head;
+	while (n){
+	  cout << "key: " << n->key << ", " << "value: " << n->val << endl;
+	  n = n->next;
 	}
-	else {
-		Node n = head;
-		while (n){
-			cout << "key: " << n->key << ", " << "value: " << n->val << endl;
-			n = n->next;
-		}
-	}
+  }
 }
 
 int main(){
