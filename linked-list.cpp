@@ -1,42 +1,7 @@
-#include <iostream>
-#include <stdbool>
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
-class LinkedList {
-private:
-  Node *head;
-  Node *tail;
-  class Node {
-  public:
-    int val;
-    Node *next;
-
-    Node(int val) : val{val}, next{nullptr} {}
-  };
-public:
-  LinkedList(): head{nullptr}, tail{nullptr} {}
-  ~LinkedList();
-
-  //operations
-  int size() const;
-  bool isEmpty() const;
-
-  //insert
-  void insertFront(int val);
-  void insertBack(int val);
-  void insertAfter(int key, int val);
-
-  //remove - list must be non-empty
-  void removeAt(int key);
-
-  //overload output operator for print
-  friend std::ostream &operator<<(std::ostream &out, const LinkedList LL);
-
-  //print
-  void skipPrint() const;
-
-  //advanced operations
-  bool isCycle() const;
-};
+#include "linked-list.h"
 
 int LinkedList::size() const{
   int total = 0;
@@ -56,7 +21,7 @@ bool LinkedList::isEmpty() const{
   size() ? true : false;
 }
 
-void LinkedList::insertFront(int val){
+void LinkedList::insertFront(const int val){
   Node n = Node(val);
   if (isEmpty()){
     head = n;
@@ -67,7 +32,7 @@ void LinkedList::insertFront(int val){
   }
 }
 
-void LinkedList::insertBack(int val){
+void LinkedList::insertBack(const int val){
   Node *n = Node(val);
   if (isEmpy()){
     head = n;
@@ -78,7 +43,7 @@ void LinkedList::insertBack(int val){
   }
 }
 
-void LinkedList::insertAfter(int key, int val){
+void LinkedList::insertAfter(const int key, const int val){
   if (isEmpty()){
 	head = n;
 	tail = n;
@@ -100,7 +65,7 @@ void LinkedList::insertAfter(int key, int val){
   }
 }
 
-void LinkedList::removeAt(int key){
+void LinkedList::removeAt(const int key){
   Node *n = head;
   if (size() == 1){
 	if (n->key == key){
@@ -151,7 +116,8 @@ void LinkedList::skipPrint() const {
   }
 }
 
-int main(){
-  LinkedList LL = LinkedList();
-  cout << LL;
+void LinkedList::convertArray(const int arr[]){
+
 }
+
+#endif
